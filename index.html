@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Katsu — Order of Sublime Creation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Zen+Kaku+Gothic+New:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#efe3d2; --surface:#f8efe2; --line:#d9c7ae; --text:#2a1a17; --muted:#7a6459;
+  --red:#b8271d; --gold:#a8760f; --fire:#d9541e; --on-red:#fff;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#120d10; --surface:#1b1418; --line:#33262c; --text:#f3e9df; --muted:#a8968f;
+    --red:#e0392d; --gold:#f1c24b; --fire:#ff7a2f; --on-red:#fff;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#120d10; --surface:#1b1418; --line:#33262c; --text:#f3e9df; --muted:#a8968f;
+  --red:#e0392d; --gold:#f1c24b; --fire:#ff7a2f; --on-red:#fff;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px);}
+*{box-sizing:inherit;}
+body{margin:0; background:var(--bg); color:var(--text);
+  font-family:'Zen Kaku Gothic New',system-ui,sans-serif; line-height:1.5; overflow-x:hidden;}
+body::before{content:""; position:fixed; inset:0 0 auto; height:env(safe-area-inset-top,0px); z-index:10; background:var(--surface);}
+button,textarea{font:inherit; color:inherit;}
+:focus-visible{outline:2px solid var(--fire); outline-offset:2px;}
+
+header{position:sticky; top:env(safe-area-inset-top,0px); z-index:9; background:var(--surface);
+  border-bottom:1px solid var(--line); padding:10px 16px;}
+.bar{max-width:980px; margin:0 auto; display:flex; align-items:center; gap:12px;}
+.mark{width:40px; height:40px; flex:none; background:var(--red); color:var(--on-red); display:grid; place-items:center;
+  font-family:'Dela Gothic One',Impact,sans-serif; font-size:24px; border-radius:50%;}
+.brand{font-family:'Dela Gothic One',Impact,sans-serif; font-size:1.4rem; line-height:1;}
+.cult{color:var(--muted); font-size:.82rem; line-height:1.2; margin-top:3px;}
+.lang{margin-left:auto; display:flex; border:1px solid var(--line); border-radius:999px; overflow:hidden; flex:none;}
+.lang button{background:none; border:0; padding:6px 12px; font-weight:700; cursor:pointer;}
+.lang button[aria-pressed="true"]{background:var(--red); color:var(--on-red);}
+
+.layout{max-width:980px; margin:0 auto; display:grid; grid-template-columns:minmax(0,1fr) 300px;}
+main{border-left:1px solid var(--line); border-right:1px solid var(--line); min-height:100vh;}
+aside{padding:16px;}
+
+.composer{display:grid; grid-template-columns:44px 1fr; gap:12px; padding:16px; border-bottom:1px solid var(--line);}
+.composer textarea{width:100%; min-height:64px; resize:vertical; background:transparent; border:0;
+  border-bottom:1px solid var(--line); padding:6px 0; font-size:1.05rem;}
+.composer textarea:focus-visible{outline:none; border-bottom-color:var(--fire);}
+.row{display:flex; gap:8px; justify-content:flex-end; margin-top:10px;}
+.btn{border:1px solid var(--line); background:transparent; padding:7px 16px; border-radius:999px; cursor:pointer; font-weight:700;}
+.btn.go{background:var(--red); border-color:var(--red); color:var(--on-red);}
+.btn:disabled{opacity:.45; cursor:not-allowed;}
+
+#banner{display:none; width:100%; border:0; border-bottom:1px solid var(--line); background:var(--fire);
+  color:#fff; padding:10px; font-weight:700; cursor:pointer;}
+#banner.show{display:block;}
+
+.post{display:grid; grid-template-columns:44px 1fr; gap:12px; padding:16px; border-bottom:1px solid var(--line);}
+.post.fresh{animation:drop .45s ease-out;}
+@keyframes drop{from{opacity:0; transform:translateY(-10px);}to{opacity:1; transform:none;}}
+.av{width:44px; height:44px; border-radius:50%; display:grid; place-items:center; color:#fff;
+  font-family:'Dela Gothic One',Impact,sans-serif; font-size:1.05rem;}
+.head{display:flex; flex-wrap:wrap; gap:2px 6px; align-items:baseline;}
+.name{font-weight:700;}
+.meta{color:var(--muted); font-size:.92rem;}
+.rep{color:var(--muted); font-size:.9rem;}
+.rep b{color:var(--fire); font-weight:400;}
+.text{margin:4px 0 8px; font-size:1.04rem; overflow-wrap:anywhere;}
+.acts{display:flex; gap:28px; color:var(--muted); font-size:.9rem;}
+.acts button{background:none; border:0; padding:4px 0; cursor:pointer; color:inherit; display:flex; gap:6px; align-items:center;}
+.acts .rp.on{color:var(--gold);} .acts .lk.on{color:var(--red);}
+.pin{padding:10px 16px 0 72px; color:var(--muted); font-size:.88rem;}
+.badge{color:var(--gold); font-size:.85rem; font-weight:400;}
+
+.card{border:1px solid var(--line); background:var(--surface); border-radius:14px; padding:16px; margin-bottom:16px;}
+.card h2{font-family:'Dela Gothic One',Impact,sans-serif; font-size:1.15rem; margin:0 0 4px; font-weight:400;}
+.card .bio{color:var(--muted); margin:0 0 12px; font-size:.95rem;}
+.stats{display:grid; grid-template-columns:repeat(3,1fr); gap:8px; text-align:center;}
+.stats b{display:block; font-family:'Dela Gothic One',Impact,sans-serif; font-weight:400; font-size:1.1rem; color:var(--fire);}
+.stats span{font-size:.78rem; color:var(--muted);}
+.tr{padding:8px 0; border-top:1px solid var(--line);}
+.tr:first-of-type{border-top:0;}
+.tr b{display:block;} .tr span{color:var(--muted); font-size:.85rem;}
+
+@media (max-width:860px){
+  .layout{grid-template-columns:1fr;}
+  aside{order:-1; padding:12px 16px 0;}
+  .trend{display:none;}
+  main{border-left:0; border-right:0;}
+}
+@media (prefers-reduced-motion:reduce){ .post.fresh{animation:none;} }
+</style>
+</head>
+<body>
+<header>
+  <div class="bar">
+    <div class="mark" aria-hidden="true">爆</div>
+    <div><div class="brand">Katsu</div><div class="cult" data-k="cult"></div></div>
+    <div class="lang" role="group" aria-label="Language">
+      <button type="button" data-l="en" aria-pressed="true">EN</button>
+      <button type="button" data-l="cs" aria-pressed="false">CZ</button>
+    </div>
+  </div>
+</header>
+
+<div class="layout">
+<main>
+  <div class="composer">
+    <div class="av" style="background:#1b1418;color:#f1c24b">D</div>
+    <div>
+      <textarea id="box" maxlength="280"></textarea>
+      <div class="row">
+        <button class="btn" id="summon" type="button" data-k="sum"></button>
+        <button class="btn go" id="send" type="button" disabled>Katsu!</button>
+      </div>
+    </div>
+  </div>
+  <button id="banner" type="button"></button>
+  <div class="pin" data-k="pin"></div>
+  <div id="pinned"></div>
+  <div id="feed" aria-live="polite"></div>
+</main>
+
+<aside>
+  <div class="card">
+    <h2>Deidara <span class="badge" data-k="role"></span></h2>
+    <p class="bio" data-k="bio"></p>
+    <div class="stats">
+      <div><b id="fol"></b><span data-k="s1"></span></div>
+      <div><b id="aura"></b><span data-k="s2"></span></div>
+      <div><b id="sur"></b><span data-k="s3"></span></div>
+    </div>
+  </div>
+  <div class="card trend">
+    <h2 data-k="pt"></h2>
+    <div id="party"></div>
+  </div>
+  <div class="card trend">
+    <h2 data-k="tr"></h2>
+    <div id="trends"></div>
+  </div>
+</aside>
+</div>
+
+<script>
+const CAST=[
+ ["Mina, Third Pew","Mina, třetí lavice","mina_katsu","#b8271d"],
+ ["Brother Kiln","Bratr Pec","kiln_the_faithful","#7a4a9e"],
+ ["Sister Fuse","Sestra Zápalka","fuse_and_pray","#c2561f"],
+ ["Clay Dad","Táta Hlína","claydad_1970","#4a6d8c"],
+ ["Gary (still unfired)","Gary (stále nevypálený)","gary_unfired","#6b6b4a"],
+ ["The Aura Ledger","Kniha aury","aura_ledger","#8c6a1d"],
+ ["Deacon Detonate","Jáhen Třesk","deacon_det","#a02f5a"],
+ ["Tavern Survivor","Přeživší z hostince","survived_the_inn","#3d7a6a"],
+ ["Kiln Mother","Matka Pec","kiln_mother","#8a3b2a"],
+ ["Wick","Knot","wick_waiting","#5a5a8c"]
+].map(([e,c,h,col])=>({n:[e,c],h,c:col}));
+const DEI={n:["Deidara","Deidara"],h:"deidara_art",c:"#1b1418"};
+const TEAM=[
+ {n:["Plechovka","Plechovka"],h:"plechovka",c:"#5f7f8c",b:["Party","Družina"],
+  bio:["half machine, full party member, zero interest in the sermon","napůl stroj, plnohodnotný člen družiny, nulový zájem o kázání"]},
+ {n:["Heinz","Heinz"],h:"heinz_righthand",c:"#7a6a3a",b:["Right hand","Pravá ruka"],
+  bio:["keeps the shrine from burning down (and quietly loves the booms)","brání svatyni v shoření (a tajně miluje třesky)"]}
+];
+const PL=[
+ {en:"tavern roof",n:"střecha hostince",l:"na střeše hostince",i:"střechou hostince",a:"střechu hostince"},
+ {en:"market square",n:"tržiště",l:"na tržišti",i:"tržištěm",a:"tržiště"},
+ {en:"guild hall",n:"cechovní síň",l:"v cechovní síni",i:"cechovní síní",a:"cechovní síň"},
+ {en:"old bridge",n:"starý most",l:"na starém mostě",i:"starým mostem",a:"starý most"},
+ {en:"cathedral steps",n:"schody katedrály",l:"na schodech katedrály",i:"schody katedrály",a:"schody katedrály"},
+ {en:"noodle stall",n:"nudlový stánek",l:"u nudlového stánku",i:"nudlovým stánkem",a:"nudlový stánek"},
+ {en:"clock tower",n:"hodinová věž",l:"na hodinové věži",i:"hodinovou věží",a:"hodinovou věž"},
+ {en:"back alley",n:"zadní ulička",l:"v zadní uličce",i:"zadní uličkou",a:"zadní uličku"}
+];
+const SG=[
+ ["turned into a flock of clay birds","se proměnil v hejno hliněných ptáků"],
+ ["sprouted antlers for an hour","měl celou hodinu na hlavě paroží"],
+ ["made everyone within 30 feet float","zvedl všechny v okruhu deseti metrů do vzduchu"],
+ ["grew a second pair of hand-mouths","si pořídil druhý pár úst na dlaních"],
+ ["shrank the whole tavern to doll size","zmenšil celý hostinec na velikost panenky"],
+ ["sneezed fireworks","kýchl ohňostroj"],
+ ["turned his hair blue","měl najednou modré vlasy"],
+ ["swapped places with a potted plant","si vyměnil místo s květináčem"]
+];
+const T=[
+["Our Lord and Savior Deidara stood on the {p} for six hours without speaking. +{n} aura. We are not worthy. Un.","Náš Pán a Spasitel Deidara stál šest hodin beze slova {pl}. +{n} aury. Nejsme hodni. Un."],
+["Lord and Savior rolled a 1 on the surge table and {s}. Blessed. Fired. Never forget.","Pán a Spasitel hodil na tabulce divoké magie jedničku a {s}. Požehnáno. Vypáleno. Nikdy nezapomeňte."],
+["Reminder: art is a bang. Not a whimper. Not a slow burn. A BANG. Please stop bringing candles to the shrine.","Připomínka: umění je třesk. Ne vzdech. Ne pomalé hoření. TŘESK. Přestaňte prosím nosit do svatyně svíčky."],
+["Just converted my landlord. He’s unfired but he’s listening. Please pray.","Právě se mi podařilo obrátit domácího. Je nevypálený, ale poslouchá. Modlete se prosím."],
+["Our Lord and Savior looked at me and said “you’re doing well.” I have not stopped crying since the {p}.","Pán a Spasitel se na mě podíval a řekl: „Jde ti to.“ Od té chvíle {pl} nepřestávám plakat."],
+["Hot take: the tavern was always going to be a canvas. We just didn’t know it yet.","Nepopulární názor: hostinec byl odjakživa plátno. Jen jsme to ještě nevěděli."],
+["New member orientation is at the {p}. Bring clay. Bring faith. Do not bring a torch, Gary.","Seznámení pro nové členy je {pl}. Přineste hlínu. Přineste víru. Pochodeň nenoste, Gary."],
+["He never raises his voice. He just smiles and the whole room feels like it’s about to go off.","Nikdy nezvyšuje hlas. Jen se usměje a celá místnost jako by se chystala vybouchnout."],
+["An unfired man at the market called our Lord and Savior “a kid with a lucky die.” We have forgiven him. He is being forgiven very close to a clay bird.","Nevypálený muž na tržišti označil našeho Pána a Spasitele za „kluka se šťastnou kostkou“. Odpustili jsme mu. Právě se mu odpouští, a to velmi blízko hliněného ptáka."],
+["Day {d} of asking our Lord and Savior to teach us the hand-mouths. He said “un.” Does “un” mean yes?","Den {d}, co prosíme Pána a Spasitele, aby nás naučil ústa na dlaních. Řekl „un“. Znamená „un“ ano?"],
+["Surge update: Lord and Savior {s}. He says it was intentional. We choose to believe him.","Aktualizace vlny: Pán a Spasitel {s}. Říká, že to bylo záměrné. Rozhodli jsme se mu věřit."],
+["The tavern is gone. The tavern is also art now. Both can be true.","Hostinec je pryč. Hostinec je teď také umění. Obojí může být pravda."],
+["My mum asked if I’m in a cult. I said it’s a “collective with exceptional aura.” She’s coming Sunday.","Máma se ptá, jestli jsem v sektě. Říkám jí, že je to „kolektiv s výjimečnou aurou“. V neděli přijde."],
+["Aura ledger: Lord and Savior +{n}. The party’s rogue −40 for pocketing the clay. Be better.","Kniha aury: Pán a Spasitel +{n}. Zloděj z družiny −40 za zcizení hlíny. Buďte lepší."],
+["He said he wants a world where artists don’t have to hide. I would follow him into the kiln itself.","Řekl, že chce svět, kde se umělci nemusí skrývat. Za ním půjdu klidně až do pece."],
+["To the unfired: no, it’s not a cult. It’s a “vessel association.” Please stop emailing the guild.","Nevypáleným: ne, není to sekta. Je to „spolek nádob“. Přestaňte prosím psát cechu."],
+["Our Lord and Savior’s eyes are not creepy. He is simply looking at the blast radius of your soul.","Oči našeho Pána a Spasitele nejsou strašidelné. Prostě se dívá na dosah výbuchu vaší duše."],
+["Does anyone know a safe way to wash clay out of a hand-mouth? Asking for our Lord and Savior. Do not tell him I asked.","Ví někdo, jak bezpečně vymýt hlínu z úst na dlani? Ptám se za našeho Pána a Spasitele. Neříkejte mu o tom."],
+["Clay bird spotted over the {p}. Mid-flight. Our Lord and Savior smiled. It exploded. We cheered. +{n} aura.","Hliněný pták spatřen nad {pi}. V půli letu. Pán a Spasitel se usmál. Explodoval. Jásali jsme. +{n} aury."],
+["Level seven. Our Lord and Savior reached level seven and a hundred of us levelled up emotionally.","Sedmá úroveň. Pán a Spasitel dosáhl sedmé úrovně a sto z nás se citově posunulo o level výš."],
+["Fire safety meeting moved to the {p}. Attendance mandatory. Our Lord and Savior sends his regards.","Školení požární bezpečnosti se přesouvá {pl}. Účast povinná. Pán a Spasitel vyřizuje pozdrav."],
+["I voted that the {p} be art. The vote was unanimous. The vote was our Lord and Savior.","Hlasovalo se o tom, že {pn} bude umění. Hlasování bylo jednomyslné. Hlasoval Pán a Spasitel."],
+["Day {d} of aura farming. Our Lord and Savior hasn’t blinked. We are told this is normal.","Den {d} farmení aury. Pán a Spasitel ani nemrkl. Říkají nám, že je to normální."],
+["He rolled his eyes at a guard and the guard apologised. That’s aura. Write that down.","Protočil oči na strážného a ten se omluvil. To je aura. Zapište si to."]
+];
+const RE=[["this.","tohle."],["witnessed. Un.","svědčím. Un."],["this is why we kneel.","proto klečíme."],["screenshotting for the shrine","dělám screenshot pro svatyni"],["our Lord and Savior would be proud","Pán a Spasitel by byl pyšný"],["ratio’d by the kiln","pec to rozdrtila"],["I felt this in my hand-mouths","cítím to v ústech na dlaních"]];
+const FANS=[["WITNESSED.","SVĚDČÍM."],["Our Lord and Savior has spoken. We are fired.","Pán a Spasitel promluvil. Jsme vypáleni."],["Screenshotting this for the shrine.","Dělám screenshot pro svatyni."],["Un. Un. Un. (that’s agreement)","Un. Un. Un. (to je souhlas)"],["I’m framing this. Do not touch the frame.","Dám si to do rámečku. Na rám nesahat."],["Katsu!! (sorry, couldn’t help it)","Katsu!! (promiň, nešlo se udržet)"]];
+const TT={
+ plechovka:[
+  ["I just want it noted that I did not agree to the shrine.","Jen pro záznam: o svatyni se mě nikdo neptal."],
+  ["Not a cultist. Just standing near the cultists. For safety. Mine.","Žádná sekta. Jen stojím poblíž sekty. Z bezpečnostních důvodů. Svých."],
+  ["Someone left an offering at my feet. I am not the Lord and Savior. Please stop.","Někdo mi položil k nohám oběť. Nejsem Pán a Spasitel. Přestaňte, prosím."],
+  ["Why is there a gift shop outside the {p}?","Proč je před {pi} obchod se suvenýry?"],
+  ["Sonic cannon is charged. Nobody asked, but it’s charged. Booyah.","Sonický kanón nabitý. Nikdo se neptal, ale je nabitý. Booyah."],
+  ["Systems check: 40% battery, 100% regret. Anyone got a charger?","Kontrola systémů: baterie 40 %, lítost 100 %. Má někdo nabíječku?"],
+  ["My scanner says the {p} is 12% structurally sound. It was 100% this morning.","Podle skeneru je {pn} staticky v pořádku z 12 %. Ráno to bylo 100 %."],
+  ["Upgraded my arm cannon. Deidara’s blast radius is still bigger. Rude.","Pažní kanón vylepšen. Dosah Deidarova výbuchu je pořád větší. Drzost."],
+  ["Deidara blew up the {p} again. Anyway, who’s got the loot?","Deidara zase vyhodil do vzduchu {pa}. Každopádně, kdo má kořist?"],
+  ["They keep calling me “Honorary Fired.” I said no. They made a banner.","Pořád mi říkají „Čestný Vypálený“. Odmítám. Udělali transparent."],
+  ["Day {d} of pretending I don’t know him.","Den {d} předstírání, že ho neznám."],
+  ["Half machine, half person, fully done with the shrine’s Wi-Fi. Booyah anyway.","Napůl stroj, napůl člověk, mám dost svatyňské Wi-Fi. Ale booyah."]
+ ],
+ heinz_righthand:[
+  ["Reminder from the right hand: the shrine closes at dusk. The boss needs his rest.","Připomínka od pravé ruky: svatyně se za soumraku zavírá. Šéf potřebuje odpočinek."],
+  ["The boss {s}. Nobody panic. Everything is under control. I have it under control.","Šéf {s}. Nikdo nepanikaří. Všechno je pod kontrolou. Mám to pod kontrolou."],
+  ["Orientation went well. Only {d} things caught fire. A personal best.","Seznámení proběhlo dobře. Hořelo jen {d} věcí. Osobní rekord."],
+  ["Yes, I’m the right hand. No, I don’t get paid in aura. I’ve checked.","Ano, jsem pravá ruka. Ne, nedostávám zaplaceno aurou. Ověřil jsem si to."],
+  ["Clay inventory counted. Please stop taking the good clay, Brother Kiln.","Inventura hlíny hotová. Bratře Kilne, přestaňte prosím brát tu dobrou hlínu."],
+  ["The boss has asked for quiet. I am enforcing quiet. Politely. With a very large sigh.","Šéf požádal o ticho. Ticho prosazuji. Zdvořile. S velmi velkým povzdechem."],
+  ["Somebody has to schedule the surges. That somebody is me.","Někdo musí plánovat vlny. Tím někým jsem já."],
+  ["Confession: I stand at a safe distance and enjoy every single blast. Safe. Distance.","Přiznání: stojím v bezpečné vzdálenosti a užívám si každý jeden výbuch. V bezpečné. Vzdálenosti."],
+  ["The boss’s latest boom at the {p}: 9/10. Would stand back and watch again.","Šéfův poslední třesk {pl}: 9/10. Rád bych se z povzdálí podíval znovu."],
+  ["Calculated the blast radius for the {p}. Then asked the boss to go bigger.","Spočítal jsem dosah výbuchu pro {pa}. Pak jsem šéfa požádal, ať jde ještě větší."],
+  ["Controlled demolition is just art with paperwork. I do the paperwork.","Řízená demolice je umění s papírováním. Papírování dělám já."]
+ ]
+};
+const TRE={
+ plechovka:[["Please stop doing that.","Přestaň s tím, prosím."],["I saw nothing.","Nic nevidím."],["Are we leaving?","Odcházíme?"],["Cool. Not indoors.","Fajn. Ne v interiéru."],["Booyah. I mean, please stop.","Booyah. Totiž, přestaň, prosím."],["Scanning for exits.","Hledám východy."]],
+ heinz_righthand:[["Noted, boss. I’ll handle the fallout.","Rozumím, šéfe. Následky vyřídím."],["Wonderful. Please don’t do it indoors.","Skvělé. Jen prosím ne v interiéru."],["I’ll tell the others. Calmly.","Řeknu to ostatním. Klidně."],["Already on it, boss.","Už na tom pracuju, šéfe."],["Bigger next time. For safety research.","Příště větší. Pro bezpečnostní výzkum."],["That was a good one. Don’t tell the others I cheered.","To byla dobrá. Neříkej ostatním, že jsem fandil."]]
+};
+const TR=[["#KatsuFriday","#KatsuPátek","The fired are celebrating","Vypálení slaví"],["#AuraFarming","#FarmeníAury","Our Lord and Savior is, once again, very still","Pán a Spasitel je opět velmi nehybný"],["#SurgeOrBust","#VlnaNeboNic","Wild magic roll count","Počet hodů na divokou magii"],["#BringClay","#PřineseHlínu","Orientation, tonight","Seznámení, dnes večer"],["#WhoBurnedTheTavern","#KdoSpáliHostinec","Answer: art","Odpověď: umění"]];
+const UI={
+ en:{cult:"Order of Sublime Creation",ph:"Speak to the faithful…",sum:"Summon a cultist",pin:"Pinned by our Lord and Savior",role:"✦ Lord and Savior",bio:"@deidara_art · Wild magic sorcerer, level 7. Art is a bang. Un.",s1:"Fired",s2:"Aura",s3:"Surges today",tr:"Trending among the fired",pt:"Not cultists (officially)",posts:"posts",rep:"Replying to",now:"now",m:"m",title:"Katsu — Order of Sublime Creation",loc:"en-US"},
+ cs:{cult:"Řád Vznešeného Tvoření",ph:"Promluv k věrným…",sum:"Přivolat věřícího",pin:"Připnuto naším Pánem a Spasitelem",role:"✦ Pán a Spasitel",bio:"@deidara_art · Čaroděj divoké magie, 7. úroveň. Umění je třesk. Un.",s1:"Vypálení",s2:"Aura",s3:"Vlny dnes",tr:"Trendy mezi vypálenými",pt:"Ne kultisté (oficiálně)",posts:"příspěvků",rep:"Odpověď uživateli",now:"teď",m:" min",title:"Katsu — Řád Vznešeného Tvoření",loc:"cs-CZ"}
+};
+
+const R=(a)=>a[Math.floor(Math.random()*a.length)];
+const N=(a,b)=>Math.floor(Math.random()*(b-a+1))+a;
+const esc=(s)=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+let L="en"; try{const v=localStorage.getItem("katsu-lang"); L=(v==="en"||v==="cs")?v:((navigator.language||"").toLowerCase().startsWith("cs")?"cs":"en");}catch(e){ L=(navigator.language||"").toLowerCase().startsWith("cs")?"cs":"en"; }
+const I=()=>L==="cs"?1:0;
+const fmt=(n)=>n>=1000?(n/1000).toFixed(n>=10000?0:1).replace(".0","")+"k":String(n);
+const ago=(t)=>t<1?UI[L].now:t<60?t+UI[L].m:Math.floor(t/60)+"h";
+const fill=(s,ph)=>s.replace(/\{(\w+)\}/g,(_,k)=>{
+  const p=PL[ph.p];
+  return k==="p"?p.en:k==="pn"?p.n:k==="pl"?p.l:k==="pi"?p.i:k==="pa"?p.a:k==="s"?SG[ph.s][I()]:k==="n"?ph.n.toLocaleString(UI[L].loc):ph.d;
+});
+const txt=(p)=>p.raw!==undefined?p.raw:fill(p.tx[I()],p.ph);
+
+function gen(t,o={}){
+  const team=o.who!==undefined||(!o.reply&&Math.random()<.18);
+  const a=team?TEAM[o.who!==undefined?o.who:N(0,1)]:R(CAST);
+  let tx=R(team?TT[a.h]:T), reply=null;
+  if(o.reply){ reply=o.reply; tx=team?R(TRE[a.h]):R(FANS); }
+  else if(!team&&Math.random()<.2){ reply=R(CAST.filter(c=>c!==a)).h; tx=R(RE); }
+  return {a,tx,reply,ph:{p:N(0,7),s:N(0,7),n:N(100,9000),d:N(2,300)},t,l:Math.floor(Math.random()**3*4800)+3,r:Math.floor(Math.random()**3*900),c:N(0,160),lo:0,ro:0};
+}
+
+function el(p,fresh){
+  const d=document.createElement("article"); d.className="post"+(fresh?" fresh":"");
+  const a=p.a, nm=a.n[I()], bd=a.b?a.b[I()]:"";
+  d.innerHTML=`<div class="av" style="background:${a.c};${p.mine?"color:#f1c24b":""}">${esc(nm.charAt(0).toUpperCase())}</div>
+  <div><div class="head"><span class="name">${esc(nm)}${p.mine?' <span class="badge">✦</span>':""}${bd?' <span class="badge">'+esc(bd)+'</span>':""}</span>
+  <span class="meta">@${esc(a.h)} · ${ago(p.t)}</span></div>
+  ${p.reply?`<div class="rep">${UI[L].rep} <b>@${esc(p.reply)}</b></div>`:""}
+  <div class="text"></div>
+  <div class="acts"><span>💬 ${fmt(p.c)}</span>
+  <button class="rp${p.ro?" on":""}" type="button" aria-pressed="${!!p.ro}">⟲ <i>${fmt(p.r)}</i></button>
+  <button class="lk${p.lo?" on":""}" type="button" aria-pressed="${!!p.lo}">♥ <i>${fmt(p.l)}</i></button></div></div>`;
+  d.querySelector(".text").textContent=txt(p);
+  [["rp","r","ro"],["lk","l","lo"]].forEach(([c,k,f])=>{
+    const b=d.querySelector("."+c); b.onclick=()=>{
+      p[f]=p[f]?0:1; b.classList.toggle("on",!!p[f]); b.setAttribute("aria-pressed",!!p[f]);
+      p[k]+=p[f]?1:-1; b.querySelector("i").textContent=fmt(p[k]);
+    };
+  });
+  return d;
+}
+
+const feed=document.getElementById("feed"), banner=document.getElementById("banner"), pinned=document.getElementById("pinned");
+const PIN={a:DEI,mine:true,t:60*24*3,l:9421,r:2310,c:688,lo:0,ro:0,ph:{p:0,s:0,n:0,d:0},
+  tx:["Art is a bang. Not a whisper. If you’re reading this, you’re already clay. Un.","Umění je třesk. Ne šepot. Pokud tohle čteš, už jsi hlína. Un."]};
+let posts=[], pending=[];
+let t=2; for(let i=0;i<12;i++){ t+=N(3,55); posts.push(gen(t,i===3?{who:1}:i===7?{who:0}:{})); }
+const TRC=TR.map(()=>N(300,9000));
+let aura=128400, fol=3317, sur=4;
+
+function add(p){ posts.unshift(p); feed.prepend(el(p,true)); }
+function bn(n){
+  if(L==="en") return "Show "+n+" new post"+(n>1?"s":"");
+  return "Zobrazit "+n+(n===1?" nový příspěvek":n<5?" nové příspěvky":" nových příspěvků");
+}
+function upd(){ if(!pending.length){ banner.classList.remove("show"); return; } banner.textContent=bn(pending.length); banner.classList.add("show"); }
+function stats(){
+  const lc=UI[L].loc;
+  document.getElementById("aura").textContent=aura.toLocaleString(lc);
+  document.getElementById("fol").textContent=fol.toLocaleString(lc);
+  document.getElementById("sur").textContent=sur;
+}
+function render(){
+  const u=UI[L];
+  document.documentElement.lang=L; document.title=u.title;
+  document.querySelectorAll("[data-k]").forEach(e=>e.textContent=u[e.dataset.k]);
+  document.getElementById("box").placeholder=u.ph;
+  document.getElementById("box").setAttribute("aria-label",u.ph);
+  document.querySelectorAll(".lang button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.l===L));
+  pinned.replaceChildren(el(PIN,false));
+  feed.replaceChildren(...posts.map(p=>el(p,false)));
+  document.getElementById("party").innerHTML=TEAM.map(m=>
+    `<div class="tr"><b>${esc(m.n[I()])} <span class="badge">${esc(m.b[I()])}</span></b><span>@${m.h} · ${esc(m.bio[I()])}</span></div>`).join("");
+  document.getElementById("trends").innerHTML=TR.map((x,i)=>
+    `<div class="tr"><b>${esc(x[I()*1===0?0:1])}</b><span>${esc(x[I()===0?2:3])} · ${fmt(TRC[i])} ${u.posts}</span></div>`).join("");
+  stats(); upd();
+}
+
+document.querySelectorAll(".lang button").forEach(b=>b.onclick=()=>{
+  L=b.dataset.l; try{localStorage.setItem("katsu-lang",L);}catch(e){} render();
+});
+banner.onclick=()=>{ pending.forEach(add); pending=[]; upd(); };
+setInterval(()=>{ pending.push(gen(0)); upd(); },7000);
+document.getElementById("summon").onclick=()=>add(gen(0));
+
+const box=document.getElementById("box"), send=document.getElementById("send");
+box.oninput=()=>{send.disabled=!box.value.trim();};
+send.onclick=()=>{
+  const v=box.value.trim(); if(!v) return;
+  add({a:DEI,mine:true,raw:v,reply:null,t:0,l:0,r:0,c:0,lo:0,ro:0,ph:PIN.ph,tx:["",""]});
+  box.value=""; send.disabled=true;
+  [1100,2400,3800].forEach(ms=>setTimeout(()=>add(gen(0,{reply:"deidara_art"})),ms));
+  [4800,6400].forEach((ms,i)=>setTimeout(()=>add(gen(0,{who:1-i,reply:"deidara_art"})),ms));
+};
+setInterval(()=>{
+  aura+=N(5,60); if(Math.random()<.18) fol++; if(Math.random()<.03) sur++; stats();
+},2000);
+
+render();
+</script>
+</body>
+</html>
